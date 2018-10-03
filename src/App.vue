@@ -5,10 +5,9 @@
         </v-toolbar>
         <v-content>
             <router-view/>
+
+            <div id="copyright">Chase Terry &copy; 2018</div>
         </v-content>
-        <v-footer app>
-            <span>Chase Terry &copy; 2018</span>
-        </v-footer>
     </v-app>
 </template>
 
@@ -24,7 +23,9 @@ export default {
 </script>
 
 <style>
-footer {
+#copyright {
     text-align: center !important;
+    padding-top: 50px;
+    padding-bottom: 25px;
 }
 </style>
