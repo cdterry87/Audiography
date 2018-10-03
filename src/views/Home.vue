@@ -6,7 +6,7 @@
                 <h1>Search</h1>
                 <v-card-text>
                     <v-form v-model="valid" @submit.prevent="search">
-                        <v-text-field v-model="searchField" :rules="searchRules" :counter="3" label="Search" required></v-text-field>
+                        <v-text-field v-model="searchField" :rules="searchRules" label="Search" required></v-text-field>
                         <v-btn :disabled="!valid" @click="search">submit</v-btn>
                         <v-btn @click="clear">clear</v-btn>
                     </v-form>
@@ -19,14 +19,20 @@
           <v-flex md8 offset-md2>
               <v-card>
                   <h2>Search Results</h2>
+                  <v-divider></v-divider>
                   <v-list two-line>
                       <v-list-tile avatar v-for="result in searchResults" :key="result.idArtist">
                           <v-list-tile-avatar>
-                                <v-icon>{{ result.strArtistThumb }}</v-icon>
+                            <img :src="result.strArtistThumb" />
                           </v-list-tile-avatar>
                           <v-list-tile-content>
                                 <v-list-tile-title>{{ result.strArtist }}</v-list-tile-title>
-                                <v-list-tile-sub-title>{{ result.strBiographyEN }}</v-list-tile-sub-title>
+                                <v-list-tile-sub-title>
+                                    <v-chip v-if="result.strGenre.length > 0">Genre: {{ result.strGenre }}</v-chip>
+                                    <v-chip v-if="result.intFormedYear.length > 0">Formed: {{ result.intFormedYear }}</v-chip>
+                                    <v-chip v-if="result.strCountry.length > 0">From: {{ result.strCountry }}</v-chip>
+                                    <v-chip v-if="result.intMembers.length > 0">Members: {{ result.intMembers }}</v-chip>
+                                </v-list-tile-sub-title>
                           </v-list-tile-content>
                       </v-list-tile>
                   </v-list>
@@ -45,23 +51,24 @@
         searchField: '',
         searchResults: [],
         searchRules: [
-            v => !!v || 'Search is required',
-            v => v.length >= 3 || 'Search field must contain at least 3 characters.'
+            v => !!v || 'Search is required'
         ]
     }),
+    watch: {
+        searchResults: function() {
+            console.log('search results: ', this.searchResults);
+        }
+    },
     methods: {
         search() {
-            let that = this;
+            let search = this;
             axios.get('https://theaudiodb.com/api/v1/json/1/search.php', {
                 params: {
                     s: this.searchField
                 }
             })
             .then(function (response) {
-                console.log('received response!');
-                that.searchResults = response;
-
-                console.log('results', that.searchResults);
+                search.searchResults = response.data.artists;
             })
             .catch(function (error) {
                 console.log(error);
@@ -69,10 +76,8 @@
         },
         clear() {
             this.searchField = '';
+            this.searchResults = [];
         }
-    },
-    created() {
-        
     }
 }
 </script>
