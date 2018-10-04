@@ -28,8 +28,30 @@
                     <v-card v-if="details.strArtistLogo.length > 0">
                         <v-img :src="details.strArtistLogo" class="image-full"></v-img>
                     </v-card>
+                    <br>
+                    <v-card v-if="details.strArtistWideThumb">
+                        <v-img :src="details.strArtistWideThumb" class="image-full"></v-img>
+                    </v-card>
+                    <br>
+                    <v-card v-if="details.strArtistFanart">
+                        <v-img :src="details.strArtistFanart" class="image-full"></v-img>
+                    </v-card>
+                    <br>
+                    <v-card v-if="details.strArtistFanart2">
+                        <v-img :src="details.strArtistFanart2" class="image-full"></v-img>
+                    </v-card>
+                    <br>
+                    <v-card v-if="details.strArtistFanart3">
+                        <v-img :src="details.strArtistFanart3" class="image-full"></v-img>
+                    </v-card>
                 </v-flex>
                 <v-flex xs12 md9>
+                    <v-card v-if="details.strArtistBanner">
+                        <v-img :src="details.strArtistBanner" class="image-full"></v-img>
+                    </v-card>
+
+                    <br>
+
                     <v-card>
                         <v-card-title class="long-text">
                             <h1>{{ details.strArtist }}</h1>
