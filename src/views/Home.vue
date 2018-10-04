@@ -26,12 +26,12 @@
               <v-card>
                   <v-list two-line>
                       <div v-for="(result, index) in searchResults" :key="result.idArtist">
-                        <v-list-tile avatar >
+                        <v-list-tile avatar :to="'/artist/' + result.idArtist">
                             <v-list-tile-avatar :size="50">
                                 <img :src="result.strArtistThumb" />
                             </v-list-tile-avatar>
                             <v-list-tile-content>
-                                    <v-list-tile-title><router-link :to="'/artist/' + result.idArtist">{{ result.strArtist }}</router-link></v-list-tile-title>
+                                    <v-list-tile-title>{{ result.strArtist }}</v-list-tile-title>
                                     <v-list-tile-sub-title>
                                         <v-chip color="indigo" text-color="white" v-if="result.strGenre.length > 0">Genre: {{ result.strGenre }}</v-chip>
                                         <v-chip color="orange" text-color="white" v-if="result.intFormedYear.length > 0">Formed: {{ result.intFormedYear }}</v-chip>
