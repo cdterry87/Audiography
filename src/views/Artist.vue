@@ -49,18 +49,14 @@
                     <v-card v-if="details.strArtistBanner">
                         <v-img :src="details.strArtistBanner" class="image-full"></v-img>
                     </v-card>
-
                     <br>
-
                     <v-card>
                         <v-card-title class="long-text">
                             <h1>{{ details.strArtist }}</h1>
                             <div v-html="details.strBiographyEN.trim()"></div>
                         </v-card-title>
                     </v-card>
-
                     <br>
-
                     <v-card>
                         <v-card-title>
                             <h2>{{ albums.length }} Albums</h2>

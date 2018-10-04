@@ -22,28 +22,25 @@
       <v-layout row v-if="searchResults.length > 0">
           <v-flex md8 offset-md2>
             <h2>Search Results</h2>
-
-              <v-card>
-                  <v-list two-line>
-                      <div v-for="(result, index) in searchResults" :key="result.idArtist">
-                        <v-list-tile avatar :to="'/artist/' + result.idArtist">
-                            <v-list-tile-avatar :size="50">
-                                <img :src="result.strArtistThumb" />
-                            </v-list-tile-avatar>
-                            <v-list-tile-content>
-                                    <v-list-tile-title>{{ result.strArtist }}</v-list-tile-title>
-                                    <v-list-tile-sub-title>
-                                        <v-chip color="indigo" text-color="white" v-if="result.strGenre.length > 0">Genre: {{ result.strGenre }}</v-chip>
-                                        <v-chip color="orange" text-color="white" v-if="result.intFormedYear.length > 0">Formed: {{ result.intFormedYear }}</v-chip>
-                                        <v-chip color="green" text-color="white" v-if="result.strCountry.length > 0">From: {{ result.strCountry }}</v-chip>
-                                        <v-chip color="red" text-color="white" v-if="result.intMembers.length > 0">Members: {{ result.intMembers }}</v-chip>
-                                    </v-list-tile-sub-title>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                        <v-divider v-if="index + 1 < searchResults.length" :key="`divider-${index}`"></v-divider>
-                      </div>
-                  </v-list>
-              </v-card>
+            <v-list two-line>
+                <div v-for="(result, index) in searchResults" :key="result.idArtist">
+                <v-list-tile avatar :to="'/artist/' + result.idArtist">
+                    <v-list-tile-avatar :size="50">
+                        <img :src="result.strArtistThumb" />
+                    </v-list-tile-avatar>
+                    <v-list-tile-content>
+                            <v-list-tile-title>{{ result.strArtist }}</v-list-tile-title>
+                            <v-list-tile-sub-title>
+                                <v-chip color="indigo" text-color="white" v-if="result.strGenre.length > 0">Genre: {{ result.strGenre }}</v-chip>
+                                <v-chip color="orange" text-color="white" v-if="result.intFormedYear.length > 0">Formed: {{ result.intFormedYear }}</v-chip>
+                                <v-chip color="green" text-color="white" v-if="result.strCountry.length > 0">From: {{ result.strCountry }}</v-chip>
+                                <v-chip color="red" text-color="white" v-if="result.intMembers.length > 0">Members: {{ result.intMembers }}</v-chip>
+                            </v-list-tile-sub-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+                <v-divider v-if="index + 1 < searchResults.length" :key="`divider-${index}`"></v-divider>
+                </div>
+            </v-list>
           </v-flex>
       </v-layout>
   </v-container>
@@ -88,34 +85,3 @@
     }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1,
-h2 {
-    font-weight: normal;
-}
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-li {
-    display: inline-block;
-    margin: 0 10px;
-}
-a {
-    color: #42b983;
-}
-
-img.image-full {
-    width: 100% !important;
-}
-
-.v-list__tile {
-    border-bottom: solid 1px #333 !important;
-}
-
-.v-chip__content a {
-    color: white !important;
-}
-</style>
