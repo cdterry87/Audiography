@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-toolbar app>
+        <v-toolbar app color="grey darken-3" text-color="white" id="toolbar">
             <router-link :to="'/'"><v-toolbar-title v-text="title"></v-toolbar-title></router-link>
         </v-toolbar>
         <v-content>
@@ -26,6 +26,10 @@ export default {
 a {
     color: inherit !important;
     text-decoration: none;
+}
+
+#toolbar a {
+    color: white !important;
 }
 
 .long-text {

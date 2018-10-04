@@ -1,25 +1,32 @@
 <template>
     <div>
         <v-container grid-list-md text-xs-center>
-            <v-layout row wrap>
+            <v-layout row wrap v-if="details">
                 <v-flex xs12 md3>
                     <v-card>
-                        <v-img :src="details.strArtistThumb" aspect-ratio="1"></v-img>
+                        <v-img :src="details.strArtistThumb" width="100%"></v-img>
+                    </v-card>
+                    <br>
+                    <v-card>
                         <v-card-title>
-                                <v-chip color="purple" text-color="white" v-if="details.strGenre.length > 0">Genre: {{ details.strGenre }}</v-chip>
-                                <v-chip color="red" text-color="white" v-if="details.intMembers.length > 0">Members: {{ details.intMembers }}</v-chip>
-                                <v-chip color="orange" text-color="white" v-if="details.intFormedYear.length > 0">Formed: {{ details.intFormedYear }}</v-chip>
-                                <v-chip color="green" text-color="white" v-if="details.strCountry.length > 0">From: {{ details.strCountry }}</v-chip>
-                                <v-chip color="primary" text-color="white" v-if="details.strFacebook.length > 0">
-                                    <a :href="details.strFacebook" target="_blank">Facebook</a>
-                                </v-chip>
-                                <v-chip color="info" text-color="white" v-if="details.strTwitter.length > 0">
-                                    <a :href="details.strTwitter" target="_blank">Twitter</a>
-                                </v-chip>
-                                <v-chip color="blue-grey" text-color="white" v-if="details.strWebsite.length > 0">
-                                    <a :href="details.strWebsite" target="_blank">www</a>
-                                </v-chip>
+                            <v-chip color="purple" text-color="white" v-if="details.strGenre.length > 0">Genre: {{ details.strGenre }}</v-chip>
+                            <v-chip color="red" text-color="white" v-if="details.intMembers.length > 0">Members: {{ details.intMembers }}</v-chip>
+                            <v-chip color="orange" text-color="white" v-if="details.intFormedYear.length > 0">Formed: {{ details.intFormedYear }}</v-chip>
+                            <v-chip color="green" text-color="white" v-if="details.strCountry.length > 0">From: {{ details.strCountry }}</v-chip>
+                            <v-chip color="primary" text-color="white" v-if="details.strFacebook.length > 0">
+                                <a :href="'http://' + details.strFacebook" target="_blank">Facebook</a>
+                            </v-chip>
+                            <v-chip color="info" text-color="white" v-if="details.strTwitter.length > 0">
+                                <a :href="'http://' + details.strTwitter" target="_blank">Twitter</a>
+                            </v-chip>
+                            <v-chip color="blue-grey" text-color="white" v-if="details.strWebsite.length > 0">
+                                <a :href="'http://' + details.strWebsite" target="_blank">www</a>
+                            </v-chip>
                         </v-card-title>
+                    </v-card>
+                    <br>
+                    <v-card v-if="details.strArtistLogo.length > 0">
+                        <v-img :src="details.strArtistLogo" width="100%"></v-img>
                     </v-card>
                 </v-flex>
                 <v-flex xs12 md9>
@@ -77,8 +84,6 @@ export default {
         })
         .then(function (response) {
             artist.details = response.data.artists[0];
-
-            console.log('artist details: ', artist.details);
         })
         .catch(function (error) {
             console.log(error);
@@ -92,13 +97,20 @@ export default {
         })
         .then(function (response) {
             artist.albums = response.data.album;
-
-            console.log('artist albums: ', artist.albums);
+            artist.sortAlbums();
         })
         .catch(function (error) {
             console.log(error);
         })
 
+    },
+    methods: {
+        sortAlbums() {
+            console.log('sorting albums...');
+            return this.albums.sort((a, b) => {
+                return b.intYearReleased - a.intYearReleased
+            });
+        }
     }
 }
 </script>
