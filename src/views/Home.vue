@@ -107,6 +107,10 @@ a {
     color: #42b983;
 }
 
+img.image-full {
+    width: 100% !important;
+}
+
 .v-list__tile {
     border-bottom: solid 1px #333 !important;
 }

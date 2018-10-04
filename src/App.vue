@@ -16,8 +16,8 @@ export default {
     name: 'App',
     data () {
         return {
-        title: 'Audiography'
-    }
+            title: 'Audiography'
+        }
     }
 }
 </script>

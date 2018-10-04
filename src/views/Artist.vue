@@ -4,7 +4,7 @@
             <v-layout row wrap v-if="details">
                 <v-flex xs12 md3>
                     <v-card>
-                        <v-img :src="details.strArtistThumb" width="100%"></v-img>
+                        <v-img :src="details.strArtistThumb" class="image-full"></v-img>
                     </v-card>
                     <br>
                     <v-card>
@@ -26,7 +26,7 @@
                     </v-card>
                     <br>
                     <v-card v-if="details.strArtistLogo.length > 0">
-                        <v-img :src="details.strArtistLogo" width="100%"></v-img>
+                        <v-img :src="details.strArtistLogo" class="image-full"></v-img>
                     </v-card>
                 </v-flex>
                 <v-flex xs12 md9>
@@ -44,7 +44,7 @@
                             <h2>{{ albums.length }} Albums</h2>
                         </v-card-title>
                         <v-list two-line v-for="(album, index) in albums" :key="album.idAlbum">
-                            <v-list-tile>
+                            <v-list-tile :to="'/album/' + album.idAlbum">
                                 <v-list-tile-avatar>
                                     <img :src="album.strAlbumThumb">
                                 </v-list-tile-avatar>
@@ -106,7 +106,6 @@ export default {
     },
     methods: {
         sortAlbums() {
-            console.log('sorting albums...');
             return this.albums.sort((a, b) => {
                 return b.intYearReleased - a.intYearReleased
             });
