@@ -110,4 +110,8 @@ a {
 .v-list__tile {
     border-bottom: solid 1px #333 !important;
 }
+
+.v-chip__content a {
+    color: white !important;
+}
 </style>

@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <v-toolbar app>
-            <v-toolbar-title v-text="title"></v-toolbar-title>
+            <router-link :to="'/'"><v-toolbar-title v-text="title"></v-toolbar-title></router-link>
         </v-toolbar>
         <v-content>
             <router-view/>
@@ -23,6 +23,16 @@ export default {
 </script>
 
 <style>
+a {
+    color: inherit !important;
+    text-decoration: none;
+}
+
+.long-text {
+    white-space: pre-wrap;
+    text-align: left !important;
+}
+
 #copyright {
     text-align: center !important;
     padding-top: 50px;
