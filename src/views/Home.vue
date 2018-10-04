@@ -19,14 +19,14 @@
           </v-flex>
       </v-layout>
       <br>
-      <v-layout row v-if="searchResults.length > 0">
+      <v-layout row v-if="searchResults && searchResults.length > 0">
           <v-flex md8 offset-md2>
             <h2>Search Results</h2>
             <v-list two-line>
                 <div v-for="(result, index) in searchResults" :key="result.idArtist">
                 <v-list-tile avatar :to="'/artist/' + result.idArtist">
                     <v-list-tile-avatar :size="50">
-                        <img :src="result.strArtistThumb" />
+                        <img :src="result.strArtistThumb + '/preview'" />
                     </v-list-tile-avatar>
                     <v-list-tile-content>
                             <v-list-tile-title>{{ result.strArtist }}</v-list-tile-title>
@@ -43,6 +43,11 @@
             </v-list>
           </v-flex>
       </v-layout>
+      <v-layout row v-if="searchPerformed && (searchResults == null || searchResults.length == 0)">
+          <v-flex md8 offset-md2>
+            <v-alert :value="true" type="error">Sorry, no results were found.  Please try your search again.</v-alert>
+          </v-flex>
+      </v-layout>
   </v-container>
 </template>
 
@@ -52,17 +57,13 @@
     export default {
     data: () => ({
         valid: false,
+        searchPerformed: false,
         searchField: '',
         searchResults: [],
         searchRules: [
             v => !!v || 'Search is required'
         ]
     }),
-    watch: {
-        searchResults: function() {
-            console.log('search results: ', this.searchResults);
-        }
-    },
     methods: {
         search() {
             let search = this;
@@ -73,12 +74,14 @@
             })
             .then(function (response) {
                 search.searchResults = response.data.artists;
+                search.searchPerformed = true;
             })
             .catch(function (error) {
                 console.log(error);
             })
         },
         clear() {
+            this.searchPerformed = false;
             this.searchField = '';
             this.searchResults = [];
         }

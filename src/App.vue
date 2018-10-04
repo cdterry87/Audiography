@@ -1,6 +1,6 @@
 <template>
     <v-app dark>
-        <v-toolbar app color="deep-purple darken-4" text-color="white" id="toolbar">
+        <v-toolbar app color="grey darken-3" text-color="white" id="toolbar">
             <router-link :to="'/'"><v-toolbar-title v-text="title"></v-toolbar-title></router-link>
         </v-toolbar>
         <v-content>

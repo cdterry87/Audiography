@@ -64,7 +64,7 @@
                         <v-list two-line v-for="(album, index) in albums" :key="album.idAlbum">
                             <v-list-tile :to="'/album/' + album.idAlbum">
                                 <v-list-tile-avatar>
-                                    <img :src="album.strAlbumThumb">
+                                    <img :src="album.strAlbumThumb + '/preview'">
                                 </v-list-tile-avatar>
                                 <v-list-tile-content>
                                     {{ album.strAlbum }} ({{ album.intYearReleased }})
