@@ -146,9 +146,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-#loading .v-progress-circular {
-    margin: 25px 50px 50px 50px;
-}
-</style>

@@ -35,13 +35,13 @@
                         <img :src="result.strArtistThumb + '/preview'" />
                     </v-list-tile-avatar>
                     <v-list-tile-content>
-                            <v-list-tile-title>{{ result.strArtist }}</v-list-tile-title>
-                            <v-list-tile-sub-title>
-                                <v-chip color="indigo" text-color="white" v-if="result.strGenre.length > 0">Genre: {{ result.strGenre }}</v-chip>
-                                <v-chip color="orange" text-color="white" v-if="result.intFormedYear.length > 0">Formed: {{ result.intFormedYear }}</v-chip>
-                                <v-chip color="green" text-color="white" v-if="result.strCountry.length > 0">From: {{ result.strCountry }}</v-chip>
-                                <v-chip color="red" text-color="white" v-if="result.intMembers.length > 0">Members: {{ result.intMembers }}</v-chip>
-                            </v-list-tile-sub-title>
+                        <v-list-tile-title>{{ result.strArtist }}</v-list-tile-title>
+                        <v-list-tile-sub-title>
+                            <v-chip color="indigo" text-color="white" v-if="result.strGenre.length > 0">Genre: {{ result.strGenre }}</v-chip>
+                            <v-chip color="orange" text-color="white" v-if="result.intFormedYear.length > 0">Formed: {{ result.intFormedYear }}</v-chip>
+                            <v-chip color="green" text-color="white" v-if="result.strCountry.length > 0">From: {{ result.strCountry }}</v-chip>
+                            <v-chip color="red" text-color="white" v-if="result.intMembers.length > 0">Members: {{ result.intMembers }}</v-chip>
+                        </v-list-tile-sub-title>
                     </v-list-tile-content>
                 </v-list-tile>
                 <v-divider v-if="index + 1 < searchResults.length" :key="`divider-${index}`"></v-divider>
