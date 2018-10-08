@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Artist from './views/Artist.vue'
 import Album from './views/Album.vue'
+import NotFound from './views/NotFound.vue'
 
 Vue.use(Router)
 
@@ -31,6 +32,10 @@ export default new Router({
         path: "/album/:id",
         component: Album,
         props: true
+    },
+    {
+        path: "*",
+        component: NotFound
     }
   ]
 })
