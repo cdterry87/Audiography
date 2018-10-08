@@ -14,10 +14,12 @@
         <v-container grid-list-md text-xs-center v-if="!isLoadingAlbum && !isLoadingTracks">
             <v-layout row wrap v-if="details">
                 <v-flex xs12 md3>
-                    <v-card>
-                        <v-img :src="details.strAlbumThumb" class="image-full"></v-img>
-                    </v-card>
-                    <br>
+                    <div v-if="details.strAlbumThumb">
+                        <v-card>
+                            <v-img :src="details.strAlbumThumb" class="image-full"></v-img>
+                        </v-card>
+                        <br>
+                    </div>
                     <v-card>
                         <router-link :to="'/artist/' + details.idArtist">
                             <h2>{{ details.strArtist }}</h2>

@@ -14,10 +14,12 @@
         <v-container grid-list-md text-xs-center v-if="!isLoadingArtist && !isLoadingAlbums">
             <v-layout row wrap v-if="details">
                 <v-flex xs12 md3>
-                    <v-card>
-                        <v-img :src="details.strArtistThumb" class="image-full"></v-img>
-                    </v-card>
-                    <br>
+                    <div v-if="details.strArtistThumb">
+                        <v-card>
+                            <v-img :src="details.strArtistThumb" class="image-full"></v-img>
+                        </v-card>
+                        <br>
+                    </div>
                     <v-card>
                         <v-card-title>
                             <v-chip color="purple" text-color="white" v-if="details.strGenre.length > 0">Genre: {{ details.strGenre }}</v-chip>
@@ -57,10 +59,12 @@
                     </v-card>
                 </v-flex>
                 <v-flex xs12 md9>
-                    <v-card v-if="details.strArtistBanner">
-                        <v-img :src="details.strArtistBanner" class="image-full"></v-img>
-                    </v-card>
-                    <br>
+                    <div v-if="details.strArtistBanner">
+                        <v-card>
+                            <v-img :src="details.strArtistBanner" class="image-full"></v-img>
+                        </v-card>
+                        <br>
+                    </div>
                     <v-card>
                         <v-card-title class="long-text">
                             <h1>{{ details.strArtist }}</h1>
