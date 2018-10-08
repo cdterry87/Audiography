@@ -49,6 +49,10 @@ img.image-full {
     color: white !important;
 }
 
+#loading .v-progress-circular {
+    margin: 25px 50px 50px 50px;
+}
+
 #copyright {
     text-align: center !important;
     padding-top: 50px;

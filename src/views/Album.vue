@@ -1,6 +1,17 @@
 <template>
     <div>
-        <v-container grid-list-md text-xs-center>
+        <v-container grid-list-md text-xs-center v-if="isLoadingAlbum || isLoadingTracks" id="loading">
+            <v-layout row wrap>
+                <v-flex xs12 md8 offset-md2>
+                    <v-card>
+                        <h2>Loading Album Information...</h2>
+                        <v-progress-circular :size="70" :width="7" color="purple" indeterminate></v-progress-circular>
+                    </v-card>
+                </v-flex>
+            </v-layout>
+        </v-container>
+
+        <v-container grid-list-md text-xs-center v-if="!isLoadingAlbum && !isLoadingTracks">
             <v-layout row wrap v-if="details">
                 <v-flex xs12 md3>
                     <v-card>
@@ -35,22 +46,6 @@
                         <v-card-title>
                             <h2>{{ tracks.length }} Tracks</h2>
                         </v-card-title>
-                        <!-- <v-list two-line v-for="(track, index) in tracks" :key="track.idTrack">
-                            <v-list-tile>
-                                <v-list-tile-avatar>
-                                    {{ track.intTrackNumber}}
-                                </v-list-tile-avatar>
-                                <v-list-tile-content>
-                                    {{ track.strTrack }} 
-                                </v-list-tile-content>
-                                <v-list-tile-action>
-                                    {{ durationConversion(track.intDuration) }}
-                                </v-list-tile-action>
-                            </v-list-tile>
-                            
-                            <v-divider v-if="index + 1 < tracks.length" :key="`divider-${index}`"></v-divider>
-                        </v-list> -->
-
                         <v-data-table v-if="tracks" :headers="headers" :items="tracks" hide-actions class="elevation-1">
                             <template slot="items" slot-scope="track">
                                 <td class="text-xs-left">{{ track.item.intTrackNumber }}</td>
@@ -73,6 +68,8 @@ export default {
     props: ['id'],
     data: function() {
         return {
+            isLoadingAlbum: true,
+            isLoadingTracks: true,
             details: '',
             tracks: '',
             headers: [
@@ -93,6 +90,7 @@ export default {
         })
         .then(function (response) {
             album.details = response.data.album[0];
+            album.isLoadingAlbum = false;
         })
         .catch(function (error) {
             console.log(error);
@@ -106,6 +104,7 @@ export default {
         })
         .then(function (response) {
             album.tracks = response.data.track;
+            album.isLoadingTracks = false;
         })
         .catch(function (error) {
             console.log(error);

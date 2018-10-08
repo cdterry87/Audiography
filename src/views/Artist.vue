@@ -1,6 +1,17 @@
 <template>
     <div>
-        <v-container grid-list-md text-xs-center>
+        <v-container grid-list-md text-xs-center v-if="isLoadingArtist || isLoadingAlbums" id="loading">
+            <v-layout row wrap>
+                <v-flex xs12 md8 offset-md2>
+                    <v-card>
+                        <h2>Loading Artist Information...</h2>
+                        <v-progress-circular :size="70" :width="7" color="purple" indeterminate></v-progress-circular>
+                    </v-card>
+                </v-flex>
+            </v-layout>
+        </v-container>
+
+        <v-container grid-list-md text-xs-center v-if="!isLoadingArtist && !isLoadingAlbums">
             <v-layout row wrap v-if="details">
                 <v-flex xs12 md3>
                     <v-card>
@@ -87,6 +98,8 @@ export default {
     props: ['id'],
     data: function() {
         return {
+            isLoadingArtist: true,
+            isLoadingAlbums: true,
             details: '',
             albums: '',
         }
@@ -102,6 +115,7 @@ export default {
         })
         .then(function (response) {
             artist.details = response.data.artists[0];
+            artist.isLoadingArtist = false;
         })
         .catch(function (error) {
             console.log(error);
@@ -116,6 +130,7 @@ export default {
         .then(function (response) {
             artist.albums = response.data.album;
             artist.sortAlbums();
+            artist.isLoadingAlbums = false;
         })
         .catch(function (error) {
             console.log(error);
@@ -131,3 +146,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+#loading .v-progress-circular {
+    margin: 25px 50px 50px 50px;
+}
+</style>
