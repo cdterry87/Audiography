@@ -19,7 +19,13 @@
           </v-flex>
       </v-layout>
       <br>
-      <v-layout row v-if="searchResults && searchResults.length > 0">
+      <v-layout row v-if="isSearching">
+          <v-flex md8 offset-md2>
+            <h2>Searching...</h2>
+            <v-progress-linear :indeterminate="true"></v-progress-linear>
+          </v-flex>
+      </v-layout>
+      <v-layout row v-if="!isSearching && searchResults && searchResults.length > 0">
           <v-flex md8 offset-md2>
             <h2>Search Results</h2>
             <v-list two-line>
@@ -58,6 +64,7 @@
     data: () => ({
         valid: false,
         searchPerformed: false,
+        isSearching: false,
         searchField: '',
         searchResults: [],
         searchRules: [
@@ -66,6 +73,8 @@
     }),
     methods: {
         search() {
+            this.isSearching = true;
+
             let search = this;
             axios.get('https://theaudiodb.com/api/v1/json/1/search.php', {
                 params: {
@@ -75,12 +84,14 @@
             .then(function (response) {
                 search.searchResults = response.data.artists;
                 search.searchPerformed = true;
+                search.isSearching = false;
             })
             .catch(function (error) {
                 console.log(error);
             })
         },
         clear() {
+            this.isSearching = false;
             this.searchPerformed = false;
             this.searchField = '';
             this.searchResults = [];
