@@ -23,17 +23,6 @@ export default {
 </script>
 
 <style>
-html,
-body {
-    height: 100%;
-    width: 100%;
-    background: #f2f6fa !important;
-    overflow-x: hidden;
-}
-
-body {
-  position: relative
-}
 a {
     color: inherit !important;
     text-decoration: none;
